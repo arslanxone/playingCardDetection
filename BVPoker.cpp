@@ -1,4 +1,4 @@
-
+# Dr.KM
 #include "opencv2/imgproc.hpp"
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/highgui.hpp"
@@ -10,15 +10,15 @@ using namespace std;
 #define EPSILON 1E-5
 
 int IM_WIDTH = 1280;				//Werte auf eigene Spielkarten anpassen
-int IM_HEIGHT = 720;				//Verh‰ltnis Breite/Hˆhe muss stimmen --> keine Verzerrung
+int IM_HEIGHT = 720;				//Verh√§ltnis Breite/H√∂he muss stimmen --> keine Verzerrung
 
 int CORNER_WIDTH = 27;
 int CORNER_HEIGHT = 75;
 
-int RANK_WIDTH = 70;               //fixe Grˆﬂen f¸r Breite und Hˆhe der Zahl 70x125 Pixel
-int RANK_HEIGHT = 125;				//125/70 passt nicht f¸r Dame etc.. RANK_HEIGHT auf 140 anpassen
+int RANK_WIDTH = 70;               //fixe Gr√∂√üen f√ºr Breite und H√∂he der Zahl 70x125 Pixel
+int RANK_HEIGHT = 125;				//125/70 passt nicht f√ºr Dame etc.. RANK_HEIGHT auf 140 anpassen
 
-int SUIT_WIDTH = 70;               //fixe Grˆﬂe f¸r Breite und Hˆhe des Symbols 70x100 Pixel
+int SUIT_WIDTH = 70;               //fixe Gr√∂√üe f√ºr Breite und H√∂he des Symbols 70x100 Pixel
 int SUIT_HEIGHT = 100;
 
 int CARD_MAX_AREA = 120000;			//Werte anpassen 
@@ -123,7 +123,7 @@ int rankMatcher(Mat rnk)                    //Rang der Karte matchen
 		cvtColor(img, img, COLOR_BGR2GRAY);
 		img = img > 120;
 
-		resize(img, img, Size(RANK_WIDTH, RANK_HEIGHT));    //resizing auf bestimmte Grˆﬂe der Bilder (Templates haben eigentlich schon die Grˆﬂe)
+		resize(img, img, Size(RANK_WIDTH, RANK_HEIGHT));    //resizing auf bestimmte Gr√∂√üe der Bilder (Templates haben eigentlich schon die Gr√∂√üe)
 
 		absdiff(img, rnk, dst);
 
@@ -234,7 +234,7 @@ int suitMatcher(Mat rnk)                    //Suit der Karte matchen
 		cvtColor(img, img, COLOR_BGR2GRAY);
 		img = img > 120;
 
-		resize(img, img, Size(SUIT_WIDTH, SUIT_HEIGHT));    //resizing auf bestimmte Grˆﬂe der Bilder (Templates haben eigentlich schon die Grˆﬂe)
+		resize(img, img, Size(SUIT_WIDTH, SUIT_HEIGHT));    //resizing auf bestimmte Gr√∂√üe der Bilder (Templates haben eigentlich schon die Gr√∂√üe)
 
 		absdiff(img, rnk, dst);
 
@@ -327,21 +327,21 @@ void findROIs(Mat r, Mat s)
 	imshow("RANKROI", rr);
 	imshow("SUITROI", ss);
 
-	//imwrite("C:/Card_Imgs/Ranks" ".jpg", rr);			//speichert das Template f¸r die Ranks ab
-	//imwrite("C:/Card_Imgs/Suits" ".jpg", ss);			//speichert das Template f¸r die Suits ab
+	//imwrite("C:/Card_Imgs/Ranks" ".jpg", rr);			//speichert das Template f√ºr die Ranks ab
+	//imwrite("C:/Card_Imgs/Suits" ".jpg", ss);			//speichert das Template f√ºr die Suits ab
 
 	//rank und suit abspeichern als jpg oder mit Code von Maier
 
 
 	int rnk_ID = rankMatcher(rr);
 
-	putText(quad, putTextString(rnk_ID), Point(125, 150), 2, 0.8, Scalar(155, 155, 0), 2, 8);				//Text f¸r rank ausgeben lassen
+	putText(quad, putTextString(rnk_ID), Point(125, 150), 2, 0.8, Scalar(155, 155, 0), 2, 8);				//Text f√ºr rank ausgeben lassen
 	imshow("Result Image", quad);
 
 
 	int suit_ID = suitMatcher(ss);
 
-	putText(quad, putTextString2(suit_ID), Point(30, 150), 2, 0.8, Scalar(155, 155, 0), 2, 8);				//Text f¸r suit ausgeben lassen (Startpunkt anpassen)
+	putText(quad, putTextString2(suit_ID), Point(30, 150), 2, 0.8, Scalar(155, 155, 0), 2, 8);				//Text f√ºr suit ausgeben lassen (Startpunkt anpassen)
 	imshow("Result Image", quad);
 
 
@@ -352,8 +352,8 @@ void isolation(Mat islo)			//isolation of rank and ruits
 {
 	Rect rank, suit;
 	rank.x = 10; rank.y = 10;
-	rank.height = 150;			//passt nicht mehr f¸r Bube,Dame,Kˆnig etc. (130 ist zu niedrig)
-	rank.width = 92;			//passt f¸r 10 nicht mehr (92)
+	rank.height = 150;			//passt nicht mehr f√ºr Bube,Dame,K√∂nig etc. (130 ist zu niedrig)
+	rank.width = 92;			//passt f√ºr 10 nicht mehr (92)
 	suit.x = 10; suit.y = (rank.y + rank.height);
 	suit.height = 130;
 	suit.width = 92;
@@ -387,7 +387,7 @@ int main(int argc, char** argv)
 
 	bool showsteps = false; // set it to false to see only result; 
 	Mat src, src_copy, edges;
-	src = imread("C:/cards deck/6 spades.jpg");				//Bild wird eingelesen --> zu Video um‰ndern! mit While-Schleife und am Ende break und waitKey(0) von anderem Programm ¸bernehmen
+	src = imread("C:/cards deck/6 spades.jpg");				//Bild wird eingelesen --> zu Video um√§ndern! mit While-Schleife und am Ende break und waitKey(0) von anderem Programm √ºbernehmen
 	if (src.empty())
 	{
 		src = Mat(400, 400, CV_8UC3, Scalar(127, 127, 127));
